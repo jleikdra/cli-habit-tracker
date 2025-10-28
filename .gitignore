@@ -1,0 +1,12 @@
+# Binaries
+habit
+*.exe
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Go
+*.test
+*.out
