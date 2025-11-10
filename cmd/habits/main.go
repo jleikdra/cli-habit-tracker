@@ -2,49 +2,52 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
-	"path/filepath"
-
-	"habit-tracker/internal/db"
-	"habit-tracker/internal/habits"
 )
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("Usage: habit <command> [args]")
-		fmt.Println("Commands:")
-		fmt.Println("  add <name>    Add a new habit")
-		os.Exit(1)
+		fmt.Println("Type 'habits help' for instructions.")
 	}
 
-	// Get database path (store in current directory for now)
-	dbPath := filepath.Join(".", "habits.db")
-
-	// Open database
-	database, err := db.Open(dbPath)
-	if err != nil {
-		log.Fatalf("Failed to open database: %v", err)
-	}
-	defer database.Close()
-
-	// Parse command
 	command := os.Args[1]
 
 	switch command {
-	case "add":
-		if len(os.Args) < 3 {
-			log.Fatal("Usage: habit add <name>")
-		}
-		name := os.Args[2]
+		case "help":
+			fmt.Println("Commands:")
+			fmt.Printf("  %-20s %s\n", "habit add [name]", "Add a new habit")
+			fmt.Printf("  %-20s %s\n", "habit do  [name]", "Mark a habit as done")
+			fmt.Printf("  %-20s %s\n", "habit rm  [name]", "Remove a habit")
+			fmt.Printf("  %-20s %s\n", "habit ls", "List all habits")
 
-		if err := habits.Add(database, name); err != nil {
-			log.Fatalf("Error: %v", err)
-		}
+		case "add":
+			if len(os.Args) < 3 {
+				fmt.Println("Error. Habit name required.")
+				os.Exit(1)
+			}
+			fmt.Println("Habit added")
 
-		fmt.Printf("✓ Added habit: %s\n", name)
+		case "do":
+			if len(os.Args) < 3 {
+				fmt.Println("Error. Habit name required.")
+				os.Exit(1)
+			}
+			fmt.Println("Habit marked as done")
 
-	default:
-		log.Fatalf("Unknown command: %s", command)
+		case "rm":
+			if len(os.Args) < 3 {
+				fmt.Println("Error. Habit name required.")
+				os.Exit(1)
+			}
+			fmt.Println("Habit removed")
+
+		case "ls":
+			fmt.Println("Habit list")
+
+		default:
+			fmt.Printf("Unknown command: %s\n", command)
+			fmt.Println("Run habit help for instructions.")
 	}
+
+}
 }
