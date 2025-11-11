@@ -1,4 +1,4 @@
-module cli-habit-tracker
+module github.com/jleikdra/cli-habit-tracker
 
 go 1.23.2
 
