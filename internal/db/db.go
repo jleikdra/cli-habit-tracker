@@ -6,7 +6,9 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-const schema = `
+// Schema is the SQL used to create the initial database schema for the
+// application. It's exported so callers can initialize the DB on startup.
+const Schema = `
 	CREATE TABLE IF NOT EXISTS habits (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT NOT NULL,
