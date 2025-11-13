@@ -14,6 +14,17 @@ type Habit struct {
 	CreatedAt time.Time
 }
 
+
+// print command menu
+func PrintCommands() {
+		fmt.Println("Commands:")
+		fmt.Printf("  %-20s %s\n", "habit add [name]", "Add a new habit")
+		fmt.Printf("  %-20s %s\n", "habit do  [name]", "Mark a habit as done")
+		fmt.Printf("  %-20s %s\n", "habit upd [old] [new]", "Update a habit name")
+		fmt.Printf("  %-20s %s\n", "habit rm  [name]", "Remove a habit")
+		fmt.Printf("  %-20s %s\n", "habit ls", "List all habits")
+}
+
 // Add inserts a new habit into the provided database.
 func Add(name string, db *sql.DB) error {
 	if name == "" {
