@@ -1,12 +1,9 @@
-# Binaries
+habits
 habit
-*.exe
-
-# Database files
+habits.db
+backend/habits.db
+*.sqlite
 *.db
-*.db-shm
-*.db-wal
-
-# Go
-*.test
+*.exe
 *.out
+*.test
