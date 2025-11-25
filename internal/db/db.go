@@ -28,5 +28,11 @@ func OpenDB(path string) (*sql.DB, error) {
 		return nil, err
 	}
 
+	// ensure the schema exists; execute the Schema SQL
+	if _, err := db.Exec(Schema); err != nil {
+		db.Close()
+		return nil, err
+	}
+
 	return db, nil
 }

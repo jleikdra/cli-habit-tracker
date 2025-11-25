@@ -93,3 +93,30 @@ Delete function:
 - Inputs: name of habit
 - Returns: string confirmind that habit x was deleted
 - Error case: Entry was not deleted
+
+
+Quick deploy instructions
+
+Install into your Go bin so the command is available as 'habit':
+
+  go install github.com/jleikdra/cli-habit-tracker/cmd/habits@latest
+
+Make sure $GOPATH/bin or $HOME/go/bin is in your PATH, for example in ~/.profile or ~/.bashrc:
+
+  export PATH="$PATH:$HOME/go/bin"
+
+Then run directly from your shell without ./:
+
+  habit help
+  habit add "daily_run"
+  habit do "daily_run"
+  habit ls
+
+Using Docker (optional) — bind mount a host directory to /data so the DB persists:
+
+  docker build -t cli-habit-tracker:latest .
+  docker run --rm -it -v "$(pwd)":/data cli-habit-tracker:latest help
+
+Notes:
+- The SQLite DB file (habits.db) will be created in the working directory (/data in the container).
+- Timestamp: 2025-11-25T10:47:31.081Z
